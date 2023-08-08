@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    form {
+      margin: 50px;
+
+    }
+  </style>
+</head>
+
+<body>
+  {% include "insurance/navbar.html" %}
+<br><br>
+{% if messages %}
+<div class="messages">
+  {% for message in messages %}
+  <h2 style="text-align: center;color: red;">{{ message }}</h2>
+  {% endfor %}
+</div>
+{% endif %}
+
+  <form method="POST" autocomplete="on"  >
+    {% csrf_token %}
+
+    <div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="type">Type</label>
+          <label for="cars">Choose a car:</label>
+
+          <select name="type" id="type">
+          <option value="car">Car</option>
+          <option value="bike">Bike</option>
+          <option value="auto">Auto</option>
+          <option value="heavy">Heavy Vehicle</option>
+          </select>
+
+
+            <div class="form-group col-md-12">
+              <label for="vehile">Vehicle No</label>
+                <input type="text" name="vehicle_no" class="form-control" minlength='9' maxlength='10' pattern="[A-Z]{2}[0-9]{1,2}[A-Z]{2}[0-9]{4}"  placeholder="enter 9 or 10 digit vehicle number"  required>
+              <p style="color: gray;">eg-KL13AB4567</p>
+            </div>
+        </div>
+
+<button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+</body>
+</html>

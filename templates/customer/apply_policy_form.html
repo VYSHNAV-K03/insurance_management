@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    form {
+      margin: 50px;
+
+    }
+  </style>
+</head>
+
+<body>
+  {% include "insurance/navbar.html" %}
+<br><br>
+  <form method="POST" autocomplete="on"  >
+    {% csrf_token %}
+    {% if fname == "aadhar" %}
+    <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="aadhar">aadhar No</label>
+          <input type="text" name="aadhar"  class="form-control" placeholder="enter 12 digit aadhar number" required pattern="\d*" minlength="12" maxlength="12">
+          <p style="color: gray;">eg-123456789012</p>
+        </div>
+        {% endif %}
+
+        {% if fname == "vehicle" %}
+        {% if messages %}
+        <div class="messages">
+          {% for message in messages %}
+          <h2 style="text-align: center;color: red;">{{ message }}</h2>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="vehicle">Vehicle Number</label>
+              <select name="vehicle" >
+                  {% for t in vehicles %}
+                  <option value="{{t.id}}">{{t.vehicle_no}}</option>
+                  {% endfor %}
+                </select>
+            </div>
+           {% endif %}
+</div>
+<button type="submit" class="btn btn-primary">Submit</button>
+
+  </form>
+</body>
+</html>

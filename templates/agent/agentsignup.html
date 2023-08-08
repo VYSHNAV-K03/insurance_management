@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+{% load widget_tweaks %}
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <style>
+    form {
+      margin: 50px;
+
+    }
+  </style>
+</head>
+
+<body>
+  {% include "insurance/navbar.html" %}
+
+
+
+  <br><br><br>
+  {% if messages %}
+<div class="messages">
+  {% for message in messages %}
+  <h2 style="text-align: center;color: red;">{{ message }}</h2>
+  {% endfor %}
+</div>
+{% endif %}
+
+  <h3 style="text-align: center;color: black;">AGENT REGISTER</h3>
+  <form method="POST" autocomplete="on" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="username">Username</label>
+        {% render_field userForm.username|attr:'required:true' class="form-control" placeholder="username" %}
+      </div>
+      <div class="form-group col-md-6">
+        <label for="inputPassword4">Password</label>
+        {% render_field userForm.password|attr:'required:true' class="form-control" placeholder="password" %}
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="first_name">First Name</label>
+        {% render_field userForm.first_name|attr:'required:true' class="form-control" placeholder="First Name" %}
+      </div>
+      <div class="form-group col-md-6">
+        <label for="last_name">Last Name</label>
+        {% render_field userForm.last_name|attr:'required:true' class="form-control" placeholder="Last Name" %}
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label for="mobile">Mobile</label>
+        {% render_field agentForm.mobile|attr:'required:true' class="form-control" maxlength=10 minlength=10 pattern="\d*" placeholder="enter 10 digit mobile number" %}
+
+      </div>
+      <div class="form-group col-md-6">
+        <label for="house">House Name</label>
+        {% render_field agentForm.house|attr:'required:true' class="form-control" placeholder="Address"%}
+      </div>
+      <div class="form-group col-md-6">
+        <label for="street">street </label>
+        {% render_field agentForm.street|attr:'required:true' class="form-control" placeholder="Address"%}
+      </div>
+      <div class="form-group col-md-6">
+        <label for="city">city</label>
+        {% render_field agentForm.city|attr:'required:true' class="form-control" placeholder="Address"%}
+      </div>
+      <div class="form-group col-md-6">
+        <label for="state">state</label>
+        {% render_field agentForm.state|attr:'required:true' class="form-control" placeholder="Address"%}
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group col-md-12">
+        <label for="profile_pic">Profile Picture</label>
+        {% render_field agentForm.profile_pic|attr:'required:true' class="form-control" placeholder="" %}
+      </div>
+      
+      <div class="form-group col-md-12">
+        <label for="agent_code">Agent code</label>
+        {% render_field agentForm.agent_code|attr:'required:true' class="form-control" minlength=5 maxlength=5 placeholder="Provided by agent" %}
+      </div>
+    </div>
+
+
+    <button type="submit" class="btn btn-primary">REGISTER</button>
+  </form>
+
+
+  <br><br>
+  {% include "insurance/footer.html" %}
+</body>
+
+</html>

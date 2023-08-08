@@ -1,0 +1,83 @@
+{% extends 'agent/agentbase.html' %}
+{% block content %}
+{%load static%}
+
+<head>
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+  <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+  <style media="screen">
+    a:link {
+      text-decoration: none;
+    }
+
+    h6 {
+      text-align: center;
+    }
+
+    .row {
+      margin: 100px;
+    }
+    label #sidebar_btn {
+      z-index: 1;
+      color: #fff;
+      position: fixed;
+      cursor: pointer;
+      left: 300px;
+      padding-left: 60px;
+      margin-top:15px;
+      font-size: 20px;
+      
+      transition: 0.5s;
+      transition-property: color;
+    }
+  </style>
+</head>
+<br><br>
+<div class="container">
+  <div class="panel panel-primary">
+    <div class="panel-heading">
+      <h6 class="panel-title">Customers</h6>
+    </div>
+    <table class="table table-hover" id="dev-table">
+      <thead>
+        <tr>
+          <th>SNo</th>
+          <th>Name</th>
+          <th>Profile Picture</th>
+          <th>Mobile</th>
+          <th>House</th>
+          <th>street</th>
+          <th>city</th>
+          <th>state</th>
+          <th>dob</th>
+          <th>aadhar number</th>
+          <th>view</th>
+          <th>Delete</th>
+        </tr>
+      </thead>
+      {% for t in customers %}
+      <tr>
+        <td> {{ forloop.counter }}</td>
+        <td> {{t.get_name}}</td>
+        <td> <img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px" /></td>
+        <td>{{t.mobile}}</td>
+        <td>{{t.house}}</td>
+        <td>{{t.street}}</td>
+        <td>{{t.city}}</td>
+        <td>{{t.state}}</td>
+        <td>{{t.dob}}</td>
+        <td>{{t.aadhar}}</td>
+        
+        
+        <td><a class="btn btn-danger btn-xs" href="/agent/agent-view-vehicle/{{t.id}}"><span class="glyphicon glyphicon-th"></span></a></td>
+        <td><a class="btn btn-danger btn-xs" href="{% url 'delete-customer' t.id  %}"><span class="glyphicon glyphicon-trash"></span></a></td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+</div>
+
+<br><br><br><br><br><br>
+{% endblock content %}
